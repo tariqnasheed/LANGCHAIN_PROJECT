@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hyderabadi Recipe Hub</title>
+    <!-- Using Marked.js to parse the LLM Markdown response -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Banner Section -->
+    <header class="banner">
+        <div class="banner-overlay">
+            <h1>Hyderabadi Recipe Hub</h1>
+            <p>Art of Hyderabadi Cuisine</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Sidebar for History -->
+        <aside class="sidebar">
+            <h3><i class="fas fa-history"></i> Recent Recipes</h3>
+            <ul id="history-list">
+                <!-- History populated by JS -->
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Input Section -->
+            <section class="input-card">
+                <h2>Design Your Dish</h2>
+                
+                <!-- NEW: Dish Name Field -->
+                <div class="form-group">
+                    <label for="dish_name">Specific Dish Name (Optional)</label>
+                    <input type="text" id="dish_name" placeholder="e.g., Hyderabadi Haleem, Dum Biryani, Mirchi ka Salan">
+                    <small style="color: #666; font-size: 0.85rem; margin-top: 4px; display: block;">Leave blank to let the chef invent a recipe based on your ingredients below.</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="diet">Dietary Restrictions & Preferences</label>
+                    <input type="text" id="diet" placeholder="e.g., Hyderabadi Muslim, Vegetarian, Keto, Gluten-free">
+                </div>
+                <div class="form-group">
+                    <label for="ingredients">Available Ingredients</label>
+                    <textarea id="ingredients" rows="3" placeholder="List your ingredients (optional if dish name is provided)..."></textarea>
+                </div>
+                <button id="generate-btn" onclick="generateRecipe()">
+                    <i class="fas fa-fire-burner"></i> Generate Recipe
+                </button>
+                <div id="loading" class="hidden">
+                    <i class="fas fa-spinner fa-spin"></i> Chef is cooking up your recipe...
+                </div>
+                <div id="error-message" class="error-msg hidden"></div>
+            </section>
+
+            <!-- Output Section -->
+            <section id="recipe-output-section" class="output-card hidden">
+                <div class="action-buttons">
+                    <button onclick="copyRecipe()"><i class="fas fa-copy"></i> Copy</button>
+                    <button onclick="printRecipe()"><i class="fas fa-print"></i> Print</button>
+                    <button onclick="shareRecipe()"><i class="fas fa-share-nodes"></i> Share</button>
+                    <button onclick="saveFavorite()" id="fav-btn"><i class="far fa-heart"></i> Favorite</button>
+                </div>
+                <div id="recipe-content" class="markdown-body">
+                    <!-- Recipe injected here -->
+                </div>
+
+                <!-- Conversation Section -->
+                <div class="conversation-section">
+                    <h3>Ask the Chef</h3>
+                    <div id="chat-history"></div>
+                    <div class="chat-input-area">
+                        <input type="text" id="followup-question" placeholder="e.g., Can I substitute chicken for mutton?">
+                        <button id="ask-btn" onclick="askFollowup()">Ask</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

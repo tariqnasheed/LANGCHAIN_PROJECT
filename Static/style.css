@@ -1,0 +1,137 @@
+:root {
+    --saffron: #f4c430;
+    --biryani-orange: #d95c14;
+    --cardamom-green: #4a5d23;
+    --dark-red: #8b0000;
+    --bg-cream: #fffdf7;
+    --text-dark: #2c1e16;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+
+body { background-color: var(--bg-cream); color: var(--text-dark); }
+
+/* Banner */
+.banner {
+    height: 300px;
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOr6e1p8dm9ioOC-vfID_pLWpB83klsAt6jBFd3o9ujqlvWeizNyshVfvf&s=10'); /* Charminar/Hyderabadi vibe placeholder */
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.banner-overlay {
+    background: rgba(44, 30, 22, 0.7);
+    padding: 2rem 4rem;
+    border-radius: 8px;
+    text-align: center;
+    color: white;
+    border-bottom: 4px solid var(--saffron);
+}
+.banner-overlay h1 { font-size: 2.5rem; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 2px;}
+
+/* Layout */
+.container {
+    display: flex;
+    max-width: 1200px;
+    margin: 2rem auto;
+    gap: 2rem;
+    padding: 0 1rem;
+}
+
+.sidebar {
+    width: 250px;
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    height: fit-content;
+}
+.sidebar h3 { color: var(--biryani-orange); margin-bottom: 1rem; border-bottom: 2px solid var(--saffron); padding-bottom: 0.5rem;}
+.sidebar ul { list-style: none; }
+.sidebar li {
+    padding: 0.8rem 0;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: var(--text-dark);
+}
+.sidebar li:hover { color: var(--biryani-orange); font-weight: bold; }
+
+.main-content { flex: 1; display: flex; flex-direction: column; gap: 2rem; }
+
+/* Cards */
+.input-card, .output-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    border-top: 4px solid var(--biryani-orange);
+}
+
+.form-group { margin-bottom: 1.5rem; }
+label { display: block; font-weight: bold; margin-bottom: 0.5rem; color: var(--cardamom-green); }
+input[type="text"], textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+input:focus, textarea:focus { outline: none; border-color: var(--biryani-orange); }
+
+button {
+    background-color: var(--biryani-orange);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+    font-weight: bold;
+}
+button:hover { background-color: var(--dark-red); }
+
+/* Markdown output styling */
+.markdown-body h2 { color: var(--dark-red); margin-bottom: 1rem; border-bottom: 2px solid var(--saffron); padding-bottom: 0.5rem; }
+.markdown-body h3 { color: var(--cardamom-green); margin: 1.5rem 0 0.5rem 0; }
+.markdown-body ul, .markdown-body ol { margin-left: 1.5rem; margin-bottom: 1rem; line-height: 1.6; }
+.markdown-body p { line-height: 1.6; margin-bottom: 1rem; }
+
+.action-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    justify-content: flex-end;
+}
+.action-buttons button { background: var(--cardamom-green); padding: 0.5rem 1rem; font-size: 0.9rem; }
+.action-buttons button:hover { background: #354219; }
+
+/* Conversation */
+.conversation-section {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 2px dashed #ccc;
+}
+#chat-history { margin-bottom: 1rem; max-height: 300px; overflow-y: auto; }
+.chat-msg { padding: 1rem; border-radius: 8px; margin-bottom: 1rem; }
+.chat-msg.user { background: #f0f0f0; margin-left: 2rem; border-left: 4px solid #aaa; }
+.chat-msg.chef { background: #fff5e6; margin-right: 2rem; border-left: 4px solid var(--saffron); }
+.chat-input-area { display: flex; gap: 1rem; }
+
+.hidden { display: none; }
+.error-msg { color: var(--dark-red); background: #fee; padding: 1rem; border-radius: 4px; margin-top: 1rem; }
+
+/* Responsive & Print */
+@media (max-width: 768px) {
+    .container { flex-direction: column; }
+    .sidebar { width: 100%; }
+}
+@media print {
+    body * { visibility: hidden; }
+    #recipe-content, #recipe-content * { visibility: visible; }
+    #recipe-content { position: absolute; left: 0; top: 0; width: 100%; }
+}

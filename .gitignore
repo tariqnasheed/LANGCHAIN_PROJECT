@@ -1,0 +1,12 @@
+# Environments
+.env
+.LANCHAIN_PROJECT/
+venv/
+env/
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Mac OS
+.DS_Store
