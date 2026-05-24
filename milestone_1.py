@@ -16,7 +16,13 @@ def get_llm():
     api_key = os.getenv("GOOGLE_API_KEY")
     if not api_key:
         raise ValueError("Google API Key is missing. Please check your .env file.")
-    return ChatGoogleGenerativeAI(model="gemini-2.5-flash", temperature=0.4, google_api_key=api_key)
+    return ChatGoogleGenerativeAI(
+        model="gemini-2.5-flash", 
+        temperature=0.7, 
+        google_api_key=api_key,
+        convert_system_message_to_human=True  # <--- Add this line
+    )
+    return ChatGoogleGenerativeAI(model="gemini-2.5-flash", temperature=0.3, google_api_key=api_key)
 
 @app.route('/')
 def index():
